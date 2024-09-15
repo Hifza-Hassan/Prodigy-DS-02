@@ -1,0 +1,52 @@
+import pandas as pd
+import numpy as np
+import seaborn as sns
+import matplotlib.pyplot as plt
+# Load the Iris dataset from seaborn
+df = sns.load_dataset('iris')
+
+# Display the first few rows of the dataset
+df.head()
+# Check the shape of the dataset (rows, columns)
+df.shape
+
+# View basic information about the dataset
+df.info()
+
+# Check for missing values
+df.isnull().sum()
+
+# Get a statistical summary of numerical columns
+df.describe()
+
+# Display the unique values in the categorical 'species' column
+df['species'].unique()
+# Plot distribution of each numerical feature
+df.hist(bins=20, figsize=(10, 8), edgecolor='black')
+plt.suptitle('Distribution of Sepal and Petal Features')
+plt.show()
+# Pairplot to explore relationships between numerical features across species
+sns.pairplot(df, hue='species', markers=["o", "s", "D"])
+plt.suptitle('Pairplot of Iris Dataset', y=1.02)
+plt.show()
+# Boxplot of Sepal Length by Species
+sns.boxplot(x='species', y='sepal_length', data=df)
+plt.title('Sepal Length by Species')
+plt.show()
+
+# Boxplot of Petal Length by Species
+sns.boxplot(x='species', y='petal_length', data=df)
+plt.title('Petal Length by Species')
+plt.show()
+# Correlation matrix
+corr_matrix = df.drop(columns=['species']).corr()
+
+# Heatmap of the correlation matrix
+plt.figure(figsize=(8, 6))
+sns.heatmap(corr_matrix, annot=True, cmap='coolwarm', linewidths=0.5)
+plt.title('Correlation Heatmap')
+plt.show()
+# Group by species and calculate the mean for each feature
+df.groupby('species').mean()
+# Save the cleaned dataset (although this dataset needed minimal cleaning)
+df.to_csv('cleaned_iris.csv', index=False)
