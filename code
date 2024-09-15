@@ -9,7 +9,6 @@ df = sns.load_dataset('iris')
 df.head()
 # Check the shape of the dataset (rows, columns)
 df.shape
-
 # View basic information about the dataset
 df.info()
 
